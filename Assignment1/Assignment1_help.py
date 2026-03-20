@@ -4,8 +4,6 @@ import random
 
 from printDoc import printDoc
 from printList import printList
-#############################################33
-#########1!!!!!!!!!!!!!!!!!!!!!!!!!!1
 class Assignment1:
     # Simulation Initialisation parameters
     NUM_MACHINES = 50        # Number of machines that issue print requests
@@ -28,10 +26,14 @@ class Assignment1:
     def startSimulation(self):
         # Create Machine and Printer threads
         # Write code here
-
+        for i in range(self.NUM_MACHINES):
+            self.mThreads.append(self.machineThread(i,self))
+        for i in range(self.NUM_PRINTERS):
+            self.pThreads.append(self.printerThread(i,self))
         # Start all the threads
         # Write code here
-
+        for i in self.mThreads+self.pThreads:
+            i.start()
         # Let the simulation run for some time
         time.sleep(self.SIMULATION_TIME)
 
@@ -40,7 +42,8 @@ class Assignment1:
 
         # Wait until all printer threads finish by joining them
         # Write code here
-
+        for i in self.mThreads+self.pThreads:
+            i.join()
         print("Simulation finished.")
         # We won't join machine threads as they may be in busy waiting.
         # Flush output and exit.
