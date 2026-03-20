@@ -42,7 +42,7 @@ class Assignment1:
 
         # Wait until all printer threads finish by joining them
         # Write code here
-        for i in self.mThreads+self.pThreads:
+        for i in self.pThreads:
             i.join()
         print("Simulation finished.")
         # We won't join machine threads as they may be in busy waiting.
@@ -94,7 +94,6 @@ class Assignment1:
                 self.machineSleep()
                 # Machine wakes up and sends a print request
                 # Write code here
-                self.printRequest(self.machineID)
                 # Check if it is safe to send a request by acquiring semaphores
                 self.isRequestSafe(self.machineID)
                 # Both semaphores have been acquired, now send a print request
